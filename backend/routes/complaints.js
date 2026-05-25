@@ -1,0 +1,32 @@
+import express from 'express';
+import multer from 'multer';
+import path from 'path';
+import { verifyFirebaseToken } from '../middleware/verifyFirebaseToken.js';
+import {
+  createComplaint,
+  analyzeComplaintImage,
+  getComplaints,
+  getComplaintById,
+  updateComplaintStatus,
+  updateComplaintAssignment,
+  voteOnComplaint,
+  getComments,
+  addComment,
+  updateComplaintArchive
+} from '../controllers/complaintsController.js';
+
+const router = express.Router();
+const upload = multer({ storage: multer.memoryStorage() });
+
+router.get('/', getComplaints);
+router.post('/analyze', verifyFirebaseToken, upload.single('image'), analyzeComplaintImage);
+router.get('/:id', getComplaintById);
+router.get('/:id/comments', getComments);
+router.post('/', verifyFirebaseToken, upload.single('image'), createComplaint);
+router.patch('/:id/status', verifyFirebaseToken, updateComplaintStatus);
+router.patch('/:id/assignment', verifyFirebaseToken, updateComplaintAssignment);
+router.patch('/:id/archive', verifyFirebaseToken, updateComplaintArchive);
+router.post('/:id/vote', verifyFirebaseToken, voteOnComplaint);
+router.post('/:id/comments', verifyFirebaseToken, addComment);
+
+export default router;

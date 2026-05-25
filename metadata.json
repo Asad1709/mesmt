@@ -1,0 +1,12 @@
+{
+  "name": "SmartNagar AI",
+  "description": "AI-Powered Crowdsourced Civic Issue Reporting & Resolution System",
+  "requestFramePermissions": [
+    "camera",
+    "geolocation",
+    "microphone"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
